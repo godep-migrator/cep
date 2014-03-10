@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/thresholderio/go-processing",
+	"GoVersion": "go1.2.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Rev": "9aea7a2fa5b79ef7fc00f63a575e72df33b4e886"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini",
+			"Comment": "v0.1-130-ge42150e",
+			"Rev": "e42150e93f948a1ed35bd1344c878d94ce2bd6ec"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/render",
+			"Rev": "9cf93fe90caa0eaf363182e92df8281c4f12e16b"
+		}
+	]
+}
