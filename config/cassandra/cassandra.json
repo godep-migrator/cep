@@ -1,0 +1,22 @@
+{
+  "development": {
+    "keyspace": "processor_development",
+    "hosts": [
+      "127.0.0.1:9042"
+    ]
+  },
+
+  "test": {
+    "keyspace": "processor_test",
+    "hosts": [
+      "127.0.0.1:9042"
+    ]
+  },
+
+  "production": {
+    "keyspace": "processor_production",
+    "hosts": [
+      "127.0.0.1:9042"
+    ]
+  }
+}

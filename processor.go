@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/thresholderio/go-processing/config/cassandra"
 	"log"
 	"os"
 	"os/signal"
@@ -42,5 +43,7 @@ func Quit() {
 
 func main() {
 	log.Println("Starting processor")
+	cassandra.CQL()
+	log.Println(cassandra.Session)
 	Run()
 }
