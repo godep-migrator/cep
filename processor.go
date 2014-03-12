@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/thresholderio/go-processing/config/cassandra"
+	"github.com/thresholderio/go-processing/models/user"
+	"github.com/thresholderio/go-processing/support/seeds"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-  "github.com/thresholderio/go-processing/support/seeds"
-  "github.com/thresholderio/go-processing/models/user"
 )
 
 func Run() {
@@ -46,14 +46,14 @@ func Quit() {
 func main() {
 	log.Println("Starting processor")
 
-  cassandra.CQL()
-  defer cassandra.Session.Close()
+	cassandra.CQL()
+	defer cassandra.Session.Close()
 
-  seeds.SeedUsers()
-  seeds.SeedUsersByFlight()
+	seeds.SeedUsers()
+	seeds.SeedUsersByFlight()
 
-  users, _ := user.FindAll()
-  log.Println(users)
+	users, _ := user.FindAll()
+	log.Println(users)
 
 	Run()
 }
