@@ -7,6 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+  "github.com/thresholderio/go-processing/support/seeds"
+  "github.com/thresholderio/go-processing/models/user"
 )
 
 func Run() {
@@ -43,7 +45,15 @@ func Quit() {
 
 func main() {
 	log.Println("Starting processor")
-	cassandra.CQL()
-	log.Println(cassandra.Session)
+
+  cassandra.CQL()
+  defer cassandra.Session.Close()
+
+  seeds.SeedUsers()
+  seeds.SeedUsersByFlight()
+
+  users, _ := user.FindAll()
+  log.Println(users)
+
 	Run()
 }

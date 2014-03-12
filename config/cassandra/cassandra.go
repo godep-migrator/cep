@@ -45,8 +45,7 @@ func CQL() {
 
 	cluster := gocql.NewCluster((*config)[env].Hosts[0].(string))
 	cluster.Keyspace = (*config)[env].Keyspace
-	cluster.Consistency = gocql.Quorum
+	cluster.Consistency = gocql.One
 
 	Session, _ = cluster.CreateSession()
-	defer Session.Close()
 }
