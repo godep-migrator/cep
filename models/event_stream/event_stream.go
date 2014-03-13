@@ -1,7 +1,7 @@
 package event_stream
 
 import (
-	"github.com/thresholderio/go-processing/models/user"
+	"github.com/thresholderio/go-processing/models/context"
 	"log"
 	"sync"
 )
@@ -43,8 +43,9 @@ func (self EventStream) Watch() {
 				self.Queue[len(self.Queue)-1] = nil
 				self.Queue = self.Queue[:len(self.Queue)-1]
 
-				users, _ := user.FindUsersByFlight(tuple[0])
-				log.Printf("users: %+v\n", users)
+				context := &context.Context{}
+				context.BuildUserContext(tuple[0], tuple[1])
+				log.Println("UserContext: %+v\n", context.UserContext)
 			}
 		}
 	}
