@@ -8,8 +8,8 @@ import (
 )
 
 type Schema struct {
-  Id gocql.UUID `json:"id"`
-  Name string `json:"name"`
+	Id   gocql.UUID `json:"id"`
+	Name string     `json:"name"`
 }
 
 func FindAll() (interface{}, error) {
@@ -28,8 +28,8 @@ func FindAll() (interface{}, error) {
 				row[i] = new(bool)
 			case gocql.TypeInt:
 				row[i] = new(int)
-      case gocql.TypeUUID:
-        row[i] = new(gocql.UUID)
+			case gocql.TypeUUID:
+				row[i] = new(gocql.UUID)
 			default:
 				log.Fatal("unhandled type: ", columns[i].TypeInfo)
 			}

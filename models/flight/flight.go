@@ -6,6 +6,6 @@ import (
 )
 
 type Schema struct {
-  Code string `json:"code"`
-  Airline string `json:"airline"`
+	Code    string `json:"code"`
+	Airline string `json:"airline"`
 }
