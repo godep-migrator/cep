@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/thresholderio/go-processing/config/cassandra"
-	"github.com/thresholderio/go-processing/models/user"
+	es "github.com/thresholderio/go-processing/models/event_stream"
 	"github.com/thresholderio/go-processing/support/initializer"
 	"github.com/thresholderio/go-processing/support/seeds"
 	"log"
@@ -18,23 +18,10 @@ func Run() {
 }
 
 func work() {
+	es.StartStreams()
 	for {
-		// Dequeue an event.
-		if len(initializer.Queue) > 0 {
-			tuple := initializer.Queue[0]
-			log.Printf("received event: %+v\n", tuple)
-			copy(initializer.Queue[0:], initializer.Queue[1:])
-			initializer.Queue[len(initializer.Queue)-1] = nil
-			initializer.Queue = initializer.Queue[:len(initializer.Queue)-1]
-
-			users, _ := user.FindUsersByFlight(tuple[0])
-			log.Printf("users: %+v\n", users)
-			time.Sleep(1000 * time.Millisecond)
-		} else {
-			log.Println("waiting for data...")
-			time.Sleep(1000 * time.Millisecond)
-		}
-
+		log.Println("waiting for data...")
+		time.Sleep(1000 * time.Millisecond)
 	}
 }
 
@@ -54,6 +41,7 @@ func HandleSignals() {
 // Ensure goroutines are cleaned up gracefully before exiting.
 func Quit() {
 	log.Println("Waiting for cleanup...")
+	es.TeardownStreams()
 	log.Println("Exiting")
 	os.Exit(1)
 }
@@ -68,7 +56,7 @@ func main() {
 	seeds.SeedUserStates()
 	seeds.SeedFlights()
 	seeds.SeedUsersByFlight()
-	initializer.Initialize()
+	initializer.Initialize(es.EventStreams)
 
 	Run()
 }
