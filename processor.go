@@ -19,8 +19,22 @@ func Run() {
 
 func work() {
 	for {
-		time.Sleep(1000 * time.Millisecond)
-		log.Println("working...")
+		// Dequeue an event.
+		if len(initializer.Queue) > 0 {
+			tuple := initializer.Queue[0]
+			log.Printf("received event: %+v\n", tuple)
+			copy(initializer.Queue[0:], initializer.Queue[1:])
+			initializer.Queue[len(initializer.Queue)-1] = nil
+			initializer.Queue = initializer.Queue[:len(initializer.Queue)-1]
+
+			users, _ := user.FindUsersByFlight(tuple[0])
+			log.Printf("users: %+v\n", users)
+			time.Sleep(1000 * time.Millisecond)
+		} else {
+			log.Println("waiting for data...")
+			time.Sleep(1000 * time.Millisecond)
+		}
+
 	}
 }
 
@@ -55,11 +69,6 @@ func main() {
 	seeds.SeedFlights()
 	seeds.SeedUsersByFlight()
 	initializer.Initialize()
-
-	for _, tuple := range initializer.Queue {
-		users, _ := user.FindUsersByFlight(tuple[0])
-		log.Printf("users: %+v\n", users)
-	}
 
 	Run()
 }
