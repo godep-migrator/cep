@@ -6,7 +6,7 @@ import (
 )
 
 func SeedUsers() {
-	if err := cassandra.Session.Query("CREATE table users (id int primary key, name varchar)").Exec(); err != nil {
+	if err := cassandra.Session.Query("CREATE table IF NOT EXISTS users (id int primary key, name varchar)").Exec(); err != nil {
 		log.Println(err)
 	}
 

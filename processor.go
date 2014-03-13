@@ -4,6 +4,7 @@ import (
 	"github.com/thresholderio/go-processing/config/cassandra"
 	"github.com/thresholderio/go-processing/models/user"
 	"github.com/thresholderio/go-processing/support/seeds"
+	"github.com/thresholderio/go-processing/support/initializer"
 	"log"
 	"os"
 	"os/signal"
@@ -51,9 +52,12 @@ func main() {
 
 	seeds.SeedUsers()
 	seeds.SeedUsersByFlight()
+  initializer.Initialize()
 
-	users, _ := user.FindAll()
-	log.Println(users)
+  for _, tuple := range initializer.Queue {
+    users, _ := user.FindUsersByFlight(tuple[0])
+    log.Printf("users: %+v\n", users)
+  }
 
 	Run()
 }
