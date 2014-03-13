@@ -35,14 +35,14 @@ func SeedUsersByFlight() {
 		log.Fatal(err)
 	}
 
-	users1 := []string{"crand", "jchao", "elee", "msilva"}
-	users2 := []string{"yliang", "jlai", "clauver"}
+	users1 := [][]string{[]string{"crand", "planning"}, []string{"jchao", "planning"}, []string{"elee", "planning"}, []string{"msilva", "boarded"}}
+	users2 := [][]string{[]string{"yliang", "planning"}, []string{"jlai", "planning"}, []string{"clauver", "boarded"}}
 
 	for _, user := range users1 {
-		cassandra.Session.Query("INSERT INTO users_by_flight (flight_code, user_state, user_name) values (?, ?, ?)", "vx-1", "planning", user).Exec()
+		cassandra.Session.Query("INSERT INTO users_by_flight (flight_code, user_state, user_name) values (?, ?, ?)", "vx-1", user[1], user[0]).Exec()
 	}
 
 	for _, user := range users2 {
-		cassandra.Session.Query("INSERT INTO users_by_flight (flight_code, user_state, user_name) values (?, ?, ?)", "vx-2", "planning", user).Exec()
+		cassandra.Session.Query("INSERT INTO users_by_flight (flight_code, user_state, user_name) values (?, ?, ?)", "vx-2", user[1], user[0]).Exec()
 	}
 }
