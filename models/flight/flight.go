@@ -6,6 +6,6 @@ import (
 )
 
 type Schema struct {
-  Id gocql.UUID `json:"id"`
   Code string `json:"code"`
+  Airline string `json:"airline"`
 }

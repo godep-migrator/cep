@@ -51,6 +51,7 @@ func main() {
 	defer cassandra.Session.Close()
 
 	seeds.SeedUsers()
+  seeds.SeedFlights()
 	seeds.SeedUsersByFlight()
   initializer.Initialize()
 
