@@ -8,7 +8,7 @@ import (
 )
 
 func FindUsersByFlight(flightCode string) (interface{}, error) {
-  iter := cassandra.Session.Query("SELECT * FROM users_by_flight WHERE code=?", flightCode).Iter()
+  iter := cassandra.Session.Query("SELECT * FROM users_by_flight WHERE flight_code=?", flightCode).Iter()
   columns := iter.Columns()
 
   rows := make([][]interface{}, 0)
@@ -23,6 +23,8 @@ func FindUsersByFlight(flightCode string) (interface{}, error) {
         row[i] = new(bool)
       case gocql.TypeInt:
         row[i] = new(int)
+      case gocql.TypeUUID:
+        row[i] = new(gocql.UUID)
       default:
         log.Fatal("unhandled type: ", columns[i].TypeInfo)
       }
