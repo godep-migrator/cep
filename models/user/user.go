@@ -7,6 +7,11 @@ import (
 	"reflect"
 )
 
+type Schema struct {
+  Id gocql.UUID `json:"id"`
+  Name string `json:"name"`
+}
+
 func FindAll() (interface{}, error) {
 	iter := cassandra.Session.Query("SELECT * FROM users").Iter()
 	columns := iter.Columns()
@@ -23,6 +28,8 @@ func FindAll() (interface{}, error) {
 				row[i] = new(bool)
 			case gocql.TypeInt:
 				row[i] = new(int)
+      case gocql.TypeUUID:
+        row[i] = new(gocql.UUID)
 			default:
 				log.Fatal("unhandled type: ", columns[i].TypeInfo)
 			}
