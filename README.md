@@ -32,6 +32,26 @@ $ godep restore
 $ go run processor.go
 ```
 
-## Creating a keyspace
+### Before checking in
+
+**1**. Make sure it compiles
+
+```shell
+$ go install
+```
+
+**2**. Run code formatter
+
+```shell
+go fmt ./...
+```
+
+**3**. Run tests
+
+```shell
+$ go test ./...
+```
+
+### Creating a keyspace
 
 `create keyspace processor_development with replication = {'class': 'SimpleStrategy', 'replication_factor': 3};`
