@@ -20,7 +20,6 @@ func Run() {
 func work() {
 	es.StartStreams()
 	for {
-		log.Println("waiting for data...")
 		time.Sleep(1000 * time.Millisecond)
 	}
 }

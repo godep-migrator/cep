@@ -4,6 +4,7 @@ import (
 	"github.com/thresholderio/go-processing/models/context"
 	"log"
 	"sync"
+	"time"
 )
 
 type EventStream struct {
@@ -46,6 +47,8 @@ func (self EventStream) Watch() {
 				context := &context.Context{}
 				context.BuildUserContext(tuple[0], tuple[1])
 				log.Printf("UserContext: %+v\n", context.UserContext)
+			} else {
+				time.Sleep(1000 * time.Millisecond)
 			}
 		}
 	}
