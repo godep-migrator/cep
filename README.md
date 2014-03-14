@@ -3,14 +3,14 @@ go-processing
 
 Intake -> [Processing] -> Dispatch
 
-# Dependencies
+## Dependencies
 
 1. go 1.2
 2. godep
 3. cassandra 2.0+
 4. kafka 0.8
 
-# Getting Started
+## Getting Started
 
 **0**. Start cassandra and kafka via `cassandra` and `bin/zookeeper-server-start.sh` and `bin/kafka-server-start.sh`
 
