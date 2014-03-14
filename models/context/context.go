@@ -2,9 +2,9 @@ package context
 
 import (
 	"github.com/thresholderio/go-processing/models/user"
-	"log"
 )
 
+// Users = [username, user state]
 type Context struct {
 	UserContext struct {
 		Users         [][]string
@@ -19,16 +19,17 @@ type Context struct {
 }
 
 func (self *Context) BuildUserContext(flightCode string, event string) error {
-	users, _ := user.FindUsersByFlight(flightCode)
+	rows, _ := user.FindUsersByFlight(flightCode)
 
-	/*
-	   for _, user := range users {
-	     self.UserContext.Users = append(self.UserContext.Users, reflect.ValueOf(user))
-	   }
-	*/
+	for _, row := range rows.([][]interface{}) {
+		users := []string{}
+		for _, v := range row {
+			users = append(users, v.(string))
+		}
+		self.UserContext.Users = append(self.UserContext.Users, users)
+	}
 	self.UserContext.BusinessEvent.Type = event
 	self.UserContext.BusinessEvent.Cause = "mechanical or weather"
 
-	log.Printf("users: %+v\n", users)
 	return nil
 }

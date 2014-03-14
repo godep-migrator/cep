@@ -45,7 +45,7 @@ func (self EventStream) Watch() {
 
 				context := &context.Context{}
 				context.BuildUserContext(tuple[0], tuple[1])
-				log.Println("UserContext: %+v\n", context.UserContext)
+				log.Printf("UserContext: %+v\n", context.UserContext)
 			}
 		}
 	}
