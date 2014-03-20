@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/thresholderio/go-processing",
+	"ImportPath": "github.com/jeffchao/cep",
 	"GoVersion": "go1.2.1",
 	"Deps": [
 		{

@@ -1,7 +1,7 @@
 package initializer
 
 import (
-	es "github.com/thresholderio/go-processing/models/event_stream"
+	es "github.com/jeffchao/cep/models/event_stream"
 	"sync"
 )
 

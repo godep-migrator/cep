@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/gocql/gocql"
-	"github.com/thresholderio/go-processing/config/cassandra"
+	"github.com/jeffchao/cep/config/cassandra"
 	"log"
 	"reflect"
 )

@@ -1,8 +1,8 @@
 package flight
 
 import (
-	"github.com/gocql/gocql"
-	"log"
+//	"github.com/gocql/gocql"
+//	"log"
 )
 
 type Schema struct {

@@ -1,7 +1,7 @@
 package event_stream
 
 import (
-	"github.com/thresholderio/go-processing/models/context"
+	"github.com/jeffchao/cep/models/context"
 	"log"
 	"sync"
 	"time"
@@ -46,7 +46,8 @@ func (self EventStream) Watch() {
 
 				context := &context.Context{}
 				context.BuildUserContext(tuple[0], tuple[1])
-				log.Printf("UserContext: %+v\n", context.UserContext)
+				context.BuildEngagementContext()
+				log.Printf("context: %+v\n", context)
 			} else {
 				time.Sleep(1000 * time.Millisecond)
 			}

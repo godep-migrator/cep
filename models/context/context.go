@@ -1,7 +1,7 @@
 package context
 
 import (
-	"github.com/thresholderio/go-processing/models/user"
+	"github.com/jeffchao/cep/models/user"
 )
 
 // Users = [username, user state]
@@ -31,5 +31,9 @@ func (self *Context) BuildUserContext(flightCode string, event string) error {
 	self.UserContext.BusinessEvent.Type = event
 	self.UserContext.BusinessEvent.Cause = "mechanical or weather"
 
+	return nil
+}
+
+func (self *Context) BuildEngagementContext() error {
 	return nil
 }

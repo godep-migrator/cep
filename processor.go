@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/thresholderio/go-processing/config/cassandra"
-	es "github.com/thresholderio/go-processing/models/event_stream"
-	"github.com/thresholderio/go-processing/support/initializer"
-	"github.com/thresholderio/go-processing/support/seeds"
+	"github.com/jeffchao/cep/config/cassandra"
+	es "github.com/jeffchao/cep/models/event_stream"
+	"github.com/jeffchao/cep/support/initializer"
+	"github.com/jeffchao/cep/support/seeds"
 	"log"
 	"os"
 	"os/signal"
